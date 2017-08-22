@@ -1,0 +1,36 @@
+{
+  "name": "news-scraper",
+  "version": "1.0.0",
+  "description": "Scrapes a news website",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Goosetaculous/News-Scraper.git"
+  },
+  "keywords": [
+    "News",
+    "Scraper",
+    "NodeJS"
+  ],
+  "author": "Goose",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Goosetaculous/News-Scraper/issues"
+  },
+  "homepage": "https://github.com/Goosetaculous/News-Scraper#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.15.4",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^4.11.7",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
