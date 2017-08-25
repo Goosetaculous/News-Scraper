@@ -23,6 +23,7 @@ function loadArticles(title,article_id,excerpt){
         excerpt
     })
     articles.save().then(()=>{
+
         console.log("success")
     },(e)=>{
         console.log("E:",e)

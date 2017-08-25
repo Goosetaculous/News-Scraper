@@ -30,7 +30,7 @@ module.exports=(app)=>{
     })
 
     //Route to load all Articles
-    app.get("/load",(req,res)=>{
+    app.get("/showall",(req,res)=>{
         utility.showArticles((articles)=>{
             res.send(articles)
         })
