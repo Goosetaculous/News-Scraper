@@ -56,11 +56,26 @@ module.exports={
             title && excerpt && article_id ? checkIfExist(title,article_id,excerpt): null
         })
     },
-    showArticles: (cb)=>Articles.find({}).then((articles)=>cb(articles)),
+    showAllArticles: (cb)=>Articles.find({saved: false}).then((articles)=>cb(articles)),
+    showSavedArticles: (cb)=>Articles.find({saved: true}).then((articles)=>cb(articles)),
+
     deleteArticle: (article_id)=>{
         Articles.findOneAndDelete({ article_id }).then((result)=>{
             console.log(JSON.stringify(result, undefined, 2))
         })
+    },
+    saveArticle: (article_id)=>{
+        console.log(article_id)
+        Articles.findOneAndUpdate(article_id,{
+            $set:{
+                saved: true
+            },
+        },(err)=>{
+            if(err){
+                return console.log("E",err)
+            }
+        })
+
     },
     addNote: (text,article_id,cb)=>{
         var note = new Notes({

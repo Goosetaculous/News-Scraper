@@ -6,7 +6,7 @@ module.exports=(app)=>{
         utility.getHtmlBody((body)=>{
             body ? utility.scrapeData(body): res.send("ERROR")
         })
-        res.render("index")
+        res.status(200)
     })
     //Route to delete
     app.post("/deletenote",(req,res)=>{
@@ -25,16 +25,30 @@ module.exports=(app)=>{
             if(note){
                 return res.send(note)
             }
-            res.send("error")
+            res.redirect("/#")
         })
+    })
+
+    //Save article
+    app.post("/savearticle",(req,res)=>{
+        utility.saveArticle(req.body)
+        res.status(200)
     })
 
     //Route to load all Articles
     app.get("/showall",(req,res)=>{
-        utility.showArticles((articles)=>{
+        utility.showAllArticles((articles)=>{
             res.send(articles)
         })
     })
+
+    //Show saved articles
+    app.get("/showsaved",(req,res)=>{
+        utility.showSavedArticles((articles)=>{
+            res.send(articles)
+        })
+    })
+
     //Load notes per Article
     app.get("/notes/:id",(req,res)=>{
 
