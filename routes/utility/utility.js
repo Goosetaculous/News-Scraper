@@ -60,12 +60,12 @@ module.exports={
     showSavedArticles: (cb)=>Articles.find({saved: true}).then((articles)=>cb(articles)),
 
     deleteArticle: (article_id)=>{
-        Articles.findOneAndDelete({ article_id }).then((result)=>{
+        console.log(article_id)
+        Articles.findOneAndRemove( article_id ).then((result)=>{
             console.log(JSON.stringify(result, undefined, 2))
         })
     },
     saveArticle: (article_id)=>{
-        console.log(article_id)
         Articles.findOneAndUpdate(article_id,{
             $set:{
                 saved: true

@@ -13,9 +13,19 @@ module.exports=(app)=>{
 
     })
 
-    //Route to delete
+    //Save article
+    app.post("/savearticle",(req,res)=>{
+        console.log(req.body)
+        utility.saveArticle(req.body)
+        res.status(200).send({success:1})
+    })
+
+
+    //Route to delete an article
     app.post("/deletearticle",(req,res)=>{
+        console.log(req.body)
         utility.deleteArticle(req.body)
+        res.status(200).send({success:1})
 
     })
 
@@ -29,11 +39,7 @@ module.exports=(app)=>{
         })
     })
 
-    //Save article
-    app.post("/savearticle",(req,res)=>{
-        utility.saveArticle(req.body)
-        res.status(200)
-    })
+
 
     //Route to load all Articles
     app.get("/showall",(req,res)=>{
