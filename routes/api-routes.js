@@ -6,12 +6,9 @@ module.exports=(app)=>{
         utility.getHtmlBody((body)=>{
             body ? utility.scrapeData(body): res.send("ERROR")
         })
-        res.status(200)
+        res.status(200).send({success:1})
     })
-    //Route to delete
-    app.post("/deletenote",(req,res)=>{
 
-    })
 
     //Save article
     app.post("/savearticle",(req,res)=>{
@@ -39,6 +36,22 @@ module.exports=(app)=>{
         })
     })
 
+    //Route to delete
+    app.post("/deletenote",(req,res)=>{
+
+    })
+
+    //Delete a note
+    //Load notes per Article
+    app.delete("/notes/:id",(req,res)=>{
+
+    })
+
+    //Load note per Article
+    app.get("/notes/:id",(req,res)=>{
+
+    })
+
 
 
     //Route to load all Articles
@@ -55,14 +68,7 @@ module.exports=(app)=>{
         })
     })
 
-    //Load notes per Article
-    app.get("/notes/:id",(req,res)=>{
 
-    })
 
-    //Delete a note
-    //Load notes per Article
-    app.delete("/notes/:id",(req,res)=>{
 
-    })
 }

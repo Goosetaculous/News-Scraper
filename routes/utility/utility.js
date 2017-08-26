@@ -4,8 +4,6 @@ const {Articles} =  require('../../models/Articles')
 const {Notes} =  require('../../models/Note')
 const URL =  "https://techcrunch.com/"
 
-
-
 function checkIfExist(title,article_id,excerpt){
     Articles.find({
         title,
@@ -23,7 +21,6 @@ function loadArticles(title,article_id,excerpt){
         excerpt
     })
     articles.save().then(()=>{
-
         console.log("success")
     },(e)=>{
         console.log("E:",e)
@@ -34,7 +31,6 @@ function pushToArticle(article_id,note_id){
     Articles.findOneAndUpdate({ article_id }, { $push: { "notes": note_id} }, { new: true }, function(err, newdoc) {
         if (!err) {
             console.log("success")
-
         } else {
             console.log("CHECK")
         }
@@ -58,7 +54,6 @@ module.exports={
     },
     showAllArticles: (cb)=>Articles.find({saved: false}).then((articles)=>cb(articles)),
     showSavedArticles: (cb)=>Articles.find({saved: true}).then((articles)=>cb(articles)),
-
     deleteArticle: (article_id)=>{
         console.log(article_id)
         Articles.findOneAndRemove( article_id ).then((result)=>{
@@ -75,7 +70,6 @@ module.exports={
                 return console.log("E",err)
             }
         })
-
     },
     addNote: (text,article_id,cb)=>{
         var note = new Notes({
