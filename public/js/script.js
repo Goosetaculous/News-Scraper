@@ -31,9 +31,7 @@ $(document).ready(function () {
                     <button class="waves-effect waves-light btn" attr-id=${value.article_id}>Remove Article</button>                                        
                     </div>`
                 )
-
                 addNoteModal(value.article_id)
-
             });
         })
     }
@@ -50,19 +48,19 @@ $(document).ready(function () {
                             <label for="${id}-input}">Notes</label>
                          </div>
                     </div>
-                    <div class="modal-action modal-close waves-effect waves-green btn-flat test"></div>
-                    
-                
+                    <button class="test">Submit</button>
                 </form>
                 <div class="modal-footer">
-                    <button type="submit" form="${id}-form" class="modal-action modal-close waves-effect waves-green btn-flat" id="submit-modal">submit</button>
+                    <button class="modal-action modal-close waves-effect waves-green btn-flat" id="submit-modal">submit</button>
                 </div>
         </div>        
         `
         )
-
-
     }
+
+    $("button.test").on("click",()=>{
+        console.log("test")
+    })
 
 
     $(".data, .saved-data").on("click", "button", (event) => {
@@ -73,7 +71,6 @@ $(document).ready(function () {
             method: "POST",
             data: {article_id}
         }
-
         if (button_text === "Save") {
             obj.url = "/savearticle"
             $.ajax(obj).done(() => {
@@ -97,8 +94,13 @@ $(document).ready(function () {
             })
             showScrapedData()
         })
+    })
 
+    $(".home").on("click",()=>{
 
+        $(".saved-data").hide("fast",()=>{
+            $(".data").show()
+        })
     })
 
     $("a.modal-scrape-ok").on("click",()=>{
@@ -127,9 +129,6 @@ $(document).ready(function () {
     })
 
 
-    $("button#submit-modal").on("click",()=>{
-        console.log("test")
-    })
 
 
 })
