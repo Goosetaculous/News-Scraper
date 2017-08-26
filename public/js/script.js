@@ -36,23 +36,24 @@ $(document).ready(function () {
         })
     }
 
-    function addNoteModal(id) {
+    function addNoteModal(id,_id) {
         $(".save-data-modals").append(`
         <div id=${id} class="modal">
-            <div class="modal-content">
-                <div class="${id}-notes">test</div>
-                <form class="col s12" id="${id}-form">
+            <div class="modal-content">                
+                <form class="col s12" action="/addnote" method="post">
                     <div class="row modal-form-row">
                         <div class="input-field col s12">
-                            <input id="${id}-input}" type="text" class="validate"/>
+                            <input name="text" type="text" class="validate"/>
+                            <input type="hidden" name="article_id" value=${id} class="validate"/>
+                            <input type="hidden" name="_id" value=${_id} class="validate"/>
                             <label for="${id}-input}">Notes</label>
                          </div>
                     </div>
-                    <button class="test">Submit</button>
+                    <div class="modal-footer">
+                        <button class="modal-action modal-close waves-effect waves-green btn-flat" type="submit">submit</button>
+                    </div>
                 </form>
-                <div class="modal-footer">
-                    <button class="modal-action modal-close waves-effect waves-green btn-flat" id="submit-modal">submit</button>
-                </div>
+                
         </div>        
         `
         )
@@ -73,9 +74,10 @@ $(document).ready(function () {
         }
         if (button_text === "Save") {
             obj.url = "/savearticle"
-            $.ajax(obj).done(() => {
+            $.ajax(obj).done((data) => {
+                console.log("SAVE:", data)
                 showScrapedData()
-                addNoteModal(article_id)
+                addNoteModal(article_id,data._id)
             })
         } else if (button_text === "Remove Article") {
             obj.url = "/deletearticle"

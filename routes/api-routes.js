@@ -12,9 +12,12 @@ module.exports=(app)=>{
 
     //Save article
     app.post("/savearticle",(req,res)=>{
-        console.log(req.body)
-        utility.saveArticle(req.body)
-        res.status(200).send({success:1})
+
+        utility.saveArticle(req.body,(data)=>{
+
+            res.status(200).send(data)
+        })
+
     })
 
 
@@ -28,11 +31,11 @@ module.exports=(app)=>{
 
     //Add note
     app.post("/addnote",(req,res)=>{
-        utility.addNote("test","1529790",(note)=>{
+        utility.addNote(req.body.text,req.body.article_id,req.body._id,(note)=>{
             if(note){
-                return res.send(note)
+                res.redirect("/#")
             }
-            res.redirect("/#")
+
         })
     })
 

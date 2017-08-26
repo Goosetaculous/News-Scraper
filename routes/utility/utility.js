@@ -60,20 +60,19 @@ module.exports={
             console.log(JSON.stringify(result, undefined, 2))
         })
     },
-    saveArticle: (article_id)=>{
-        Articles.findOneAndUpdate(article_id,{
-            $set:{
-                saved: true
-            },
-        },(err)=>{
-            if(err){
-                return console.log("E",err)
+    saveArticle: (article_id,cb)=>{
+        Articles.findOneAndUpdate(article_id,{$set:{saved: true}},{new: true},(err,doc)=>{
+            if(!err){
+                cb(doc)
             }
+
         })
     },
-    addNote: (text,article_id,cb)=>{
+    addNote: (text,article_id,_id,cb)=>{
         var note = new Notes({
-            note:text
+            note:text,
+            article_id: _id
+
         })
         note.save().then((note)=>{
             pushToArticle(article_id,note.id)
@@ -81,9 +80,6 @@ module.exports={
         },(e)=>{
             console.log("E:",e)
         })
-    },
-    deleteNote: (id)=>{
-
     }
 }
 

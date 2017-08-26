@@ -6,7 +6,12 @@ var NoteSchema = new mongoose.Schema({
         required:true,
         trim: true,
         minlength: 1
+    },
+    article_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required:true
     }
+
 }, { versionKey: false })
 
 var Notes = mongoose.model('notes',NoteSchema)
