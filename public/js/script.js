@@ -2,6 +2,7 @@ $(document).ready(function () {
     // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
     showScrapedData()
+    showSavedData()
 
     function showScrapedData() {
         $(".data").empty()
@@ -30,6 +31,9 @@ $(document).ready(function () {
                     <button class="waves-effect waves-light btn" attr-id=${value.article_id}>Remove Article</button>                                        
                     </div>`
                 )
+
+                addNoteModal(value.article_id)
+
             });
         })
     }
@@ -38,11 +42,22 @@ $(document).ready(function () {
         $(".save-data-modals").append(`
         <div id=${id} class="modal">
             <div class="modal-content">
-            <h4>${id}</h4>
-        </div>
-        <div class="modal-footer">
-            <a class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
-        </div>
+                <div class="${id}-notes">test</div>
+                <form class="col s12" id="${id}-form">
+                    <div class="row modal-form-row">
+                        <div class="input-field col s12">
+                            <input id="${id}-input}" type="text" class="validate"/>
+                            <label for="${id}-input}">Notes</label>
+                         </div>
+                    </div>
+                    <div class="modal-action modal-close waves-effect waves-green btn-flat test"></div>
+                    
+                
+                </form>
+                <div class="modal-footer">
+                    <button type="submit" form="${id}-form" class="modal-action modal-close waves-effect waves-green btn-flat" id="submit-modal">submit</button>
+                </div>
+        </div>        
         `
         )
 
@@ -53,8 +68,6 @@ $(document).ready(function () {
     $(".data, .saved-data").on("click", "button", (event) => {
         var button_text = $(event.target).text()
         var article_id = $(event.target).attr("attr-id")
-        var selector =  `#${article_id}`
-
         $('#'+article_id).modal().val();
         var obj = {
             method: "POST",
@@ -111,6 +124,11 @@ $(document).ready(function () {
         $(".data").hide("fast", () => {
             $(".saved-data").show()
         })
+    })
+
+
+    $("button#submit-modal").on("click",()=>{
+        console.log("test")
     })
 
 
