@@ -12,18 +12,14 @@ module.exports=(app)=>{
 
     //Save article
     app.post("/savearticle",(req,res)=>{
-
         utility.saveArticle(req.body,(data)=>{
-
             res.status(200).send(data)
         })
-
     })
 
 
     //Route to delete an article
     app.post("/deletearticle",(req,res)=>{
-        console.log(req.body)
         utility.deleteArticle(req.body)
         res.status(200).send({success:1})
 
@@ -52,9 +48,11 @@ module.exports=(app)=>{
 
     //Load note per Article
     app.get("/notes/:id",(req,res)=>{
+        utility.showNote(req.params.id,(notes)=>{
+            res.send(notes)
+        })
 
     })
-
 
 
     //Route to load all Articles

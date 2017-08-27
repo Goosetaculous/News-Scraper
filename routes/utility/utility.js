@@ -65,9 +65,9 @@ module.exports={
             if(!err){
                 cb(doc)
             }
-
         })
     },
+    showNote: (id,cb)=>Notes.find({article_id:id}).then((note)=>cb(note)),
     addNote: (text,article_id,_id,cb)=>{
         var note = new Notes({
             note:text,

@@ -31,15 +31,25 @@ $(document).ready(function () {
                     <button class="waves-effect waves-light btn" attr-id=${value.article_id}>Remove Article</button>                                        
                     </div>`
                 )
-                addNoteModal(value.article_id)
+                addNoteModal(value.article_id,value._id)
             });
         })
     }
 
+    function notePerArticle(id,_id){
+        $.get(`/notes/${_id}`,(result)=>{
+            result.length > 0 ? $("."+id+"-notes").append("<h4>NOTES</h4>"): null
+            result.forEach((data)=>{
+                $("."+id+"-notes").append(`<p>${data.note}</p>`)
+            })
+    })}
+
     function addNoteModal(id,_id) {
         $(".save-data-modals").append(`
         <div id=${id} class="modal">
-            <div class="modal-content">                
+            <div class="modal-content"> 
+                
+                <div class="${id}-notes"></div>               
                 <form class="col s12" action="/addnote" method="post">
                     <div class="row modal-form-row">
                         <div class="input-field col s12">
@@ -57,11 +67,9 @@ $(document).ready(function () {
         </div>        
         `
         )
+        notePerArticle(id,_id)
     }
 
-    $("button.test").on("click",()=>{
-        console.log("test")
-    })
 
 
     $(".data, .saved-data").on("click", "button", (event) => {
@@ -75,7 +83,6 @@ $(document).ready(function () {
         if (button_text === "Save") {
             obj.url = "/savearticle"
             $.ajax(obj).done((data) => {
-                console.log("SAVE:", data)
                 showScrapedData()
                 addNoteModal(article_id,data._id)
             })
