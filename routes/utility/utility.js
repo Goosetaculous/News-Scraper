@@ -72,7 +72,6 @@ module.exports={
         var note = new Notes({
             note:text,
             article_id: _id
-
         })
         note.save().then((note)=>{
             pushToArticle(article_id,note.id)
@@ -81,9 +80,7 @@ module.exports={
             console.log("E:",e)
         })
     },
-    deleteNote: (id,cb)=>Notes.findOneAndDelete({}).then((result)=>{
+    deleteNote: (id,cb)=>Notes.deleteOne(id).then((result)=>{
         cb(result)
     })
 }
-
-

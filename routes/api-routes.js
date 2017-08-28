@@ -33,15 +33,12 @@ module.exports=(app)=>{
         })
     })
 
-    //Route to delete
-    // // app.post("/deletenote",(req,res)=>{
-    // //
-    // })
-
     //Delete a note
-    //Load notes per Article
-    app.delete("/notes/:id",(req,res)=>{
-
+    app.post("/delete/note/",(req,res)=>{
+        console.log(req.body)
+        utility.deleteNote(req.body,(result)=>{
+            res.status(200).redirect("/")
+        })
     })
 
     //Load note per Article
@@ -49,9 +46,7 @@ module.exports=(app)=>{
         utility.showNote(req.params.id,(notes)=>{
             res.send(notes)
         })
-
     })
-
 
     //Route to load all Articles
     app.get("/showall",(req,res)=>{

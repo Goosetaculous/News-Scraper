@@ -4,6 +4,8 @@ $(document).ready(function () {
     showScrapedData()
     showSavedData()
 
+
+
     function showScrapedData() {
         $(".data").empty()
         $.get("/showall", (data) => {
@@ -38,9 +40,18 @@ $(document).ready(function () {
 
     function notePerArticle(id,_id){
         $.get(`/notes/${_id}`,(result)=>{
-            result.length > 0 ? $("."+id+"-notes").append("<h4>NOTES</h4>"): null
+            result.length > 0 ? $("."+id+"-notes").append("<h3>NOTES</h3>"): null
             result.forEach((data)=>{
-                $("."+id+"-notes").append(`<p>${data.note}<span note-id="${_id}"><B>&nbspX</B></span></p>`)
+                $("."+id+"-notes").append(`
+                    <li class="test">
+                    <form action="/delete/note/" method="post">
+                    <input type="hidden" name="_id" value='${data._id}' />
+                    <p>${data.note} &nbsp;<span style="text-align: center">
+                    <button class="waves-effect waves-light red lighten-2 btn-floating">X</button>
+                    </span>
+                    </p>
+                    </form>
+                    </li>`)
             })
     })}
 
@@ -49,7 +60,7 @@ $(document).ready(function () {
         <div id=${id} class="modal">
             <div class="modal-content"> 
                 
-                <div class="${id}-notes article-note"></div>               
+                <ul class="${id}-notes article-note"></ul>               
                 <form class="col s12" action="/addnote" method="post">
                     <div class="row modal-form-row">
                         <div class="input-field col s12">
@@ -70,8 +81,8 @@ $(document).ready(function () {
         notePerArticle(id,_id)
     }
 
-    $("div.modal-content").on("click","article-note",(event) =>{
-        console.log(event)
+    $("li.test").on("click",() =>{
+        console.log("adsf")
     })
 
 
