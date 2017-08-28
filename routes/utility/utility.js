@@ -80,7 +80,10 @@ module.exports={
         },(e)=>{
             console.log("E:",e)
         })
-    }
+    },
+    deleteNote: (id,cb)=>Notes.findOneAndDelete({}).then((result)=>{
+        cb(result)
+    })
 }
 
 

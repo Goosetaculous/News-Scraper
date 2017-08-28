@@ -22,23 +22,21 @@ module.exports=(app)=>{
     app.post("/deletearticle",(req,res)=>{
         utility.deleteArticle(req.body)
         res.status(200).send({success:1})
-
     })
 
     //Add note
     app.post("/addnote",(req,res)=>{
         utility.addNote(req.body.text,req.body.article_id,req.body._id,(note)=>{
             if(note){
-                res.redirect("/#")
+                res.redirect("/")
             }
-
         })
     })
 
     //Route to delete
-    app.post("/deletenote",(req,res)=>{
-
-    })
+    // // app.post("/deletenote",(req,res)=>{
+    // //
+    // })
 
     //Delete a note
     //Load notes per Article
@@ -68,8 +66,4 @@ module.exports=(app)=>{
             res.send(articles)
         })
     })
-
-
-
-
 }

@@ -40,7 +40,7 @@ $(document).ready(function () {
         $.get(`/notes/${_id}`,(result)=>{
             result.length > 0 ? $("."+id+"-notes").append("<h4>NOTES</h4>"): null
             result.forEach((data)=>{
-                $("."+id+"-notes").append(`<p>${data.note}</p>`)
+                $("."+id+"-notes").append(`<p>${data.note}<span note-id="${_id}"><B>&nbspX</B></span></p>`)
             })
     })}
 
@@ -49,7 +49,7 @@ $(document).ready(function () {
         <div id=${id} class="modal">
             <div class="modal-content"> 
                 
-                <div class="${id}-notes"></div>               
+                <div class="${id}-notes article-note"></div>               
                 <form class="col s12" action="/addnote" method="post">
                     <div class="row modal-form-row">
                         <div class="input-field col s12">
@@ -69,6 +69,10 @@ $(document).ready(function () {
         )
         notePerArticle(id,_id)
     }
+
+    $("div.modal-content").on("click","article-note",(event) =>{
+        console.log(event)
+    })
 
 
 
